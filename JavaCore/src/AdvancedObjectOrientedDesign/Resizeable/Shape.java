@@ -13,6 +13,9 @@ public  abstract class Shape implements Resizeable {
         this.filled = filled;
     }
 
+    public static void printShape(Shape[] shapes) {
+    }
+
     public String getColor() {
         return color;
     }
@@ -37,9 +40,9 @@ public  abstract class Shape implements Resizeable {
                 + (isFilled() ? "filled" : "not filled");
     }
 
-    public static void printShape(Shape[] shape) {
-        for (Shape x : shape) {
-            System.out.println(x.toString());
-        }
-    }
+  //  public static void printShape(Shape[] shape) {
+   //     for (Shape x : shape) {
+     //       System.out.println(x.toString());
+    //    }
+  // }
 }
