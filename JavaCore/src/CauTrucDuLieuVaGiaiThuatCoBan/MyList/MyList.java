@@ -13,7 +13,7 @@ public class MyList<E> {
     }
 
     private void ensureCapa() {
-        int newSize = elements.length * 2;
+        int newSize = elements.length +1;
         elements = Arrays.copyOf(elements, newSize);
     }
 
@@ -25,12 +25,18 @@ public class MyList<E> {
     }
 
     public E get(int i) {
-        if (i >= size || i < 0) {
+        if (i > size || i < 0) {
             throw new IndexOutOfBoundsException("Index: " + i + ", Size " + size);
         }
-        return (E) elements[i];
+        return (E) elements[i-1];
     }
 
 
+    public void Size() {
+        System.out.println(this.size);
+    }
 
+    public void length() {
+        System.out.println(this.elements.length);
+    }
 }
