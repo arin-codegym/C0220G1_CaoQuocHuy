@@ -2,10 +2,11 @@ package CleanCode;
 
 public class TennisGame {
 
-    public static final int KHONG_DIEM = 0;
-    public static final int MOT_DIEM = 1;
-    public static final int HAI_DIEM = 2;
-    public static final int BA_DIEM = 3;
+
+    private static final int KHONG_DIEM = 0;
+    private static final int MOT_DIEM =1 ;
+    private static final int BA_DIEM =3 ;
+    private static final int HAI_DIEM = 2;
 
     public static String tinhDiemHaiNguoiChoi(String tenNguoiChoi1, String tenNguoiChoi2, int diemNguoiChoi1, int diemNguoiChoi2) {
         String tenGoiDiemSo = "";

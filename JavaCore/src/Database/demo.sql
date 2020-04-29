@@ -41,8 +41,9 @@ CREATE TABLE userroles(
 -- Tạo khoá chính khi thay đổi bảng
 -- Có một số trường hợp, chúng ta muốn bổ sung khoá chính cho một bảng sau khi bảng đó đã được tạo. Chúng ta có thể sử dụng câu lệnh ADD PRIMARY KEY ở trong câu lệnh ALTER TABLE để đạt được mục đích này.
 -- Trong đó, table_name là tên của bảng đã tồn tại, primary_key_column là tên của cột muốn tạo khoá chính.
-ALTER TABLE table_name
-    ADD PRIMARY KEY(primary_key_column);
+-- ALTER TABLE table_name
+ -- ADD PRIMARY KEY(primary_key_column);--
+
 CREATE TABLE customers(
    id INT AUTO_INCREMENT PRIMARY KEY,
    name VARCHAR(40),

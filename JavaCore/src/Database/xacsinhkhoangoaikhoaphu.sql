@@ -1,6 +1,6 @@
 create table Customers (
 customer_number int primary key,
-fullname varchar(50),
+full_name varchar(50),
 address varchar(50),
 email varchar(50),
 phone int
@@ -11,6 +11,7 @@ customer_number int,
 account_type  varchar(50) ,
 account_opening_date date,
 balance double,
+tran_number int not null,
 foreign key (customer_number) references Customers (customer_number),
 foreign key (tran_number) references Transactions(tran_number)
 );
