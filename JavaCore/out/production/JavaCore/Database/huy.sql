@@ -17,7 +17,7 @@ CREATE TABLE Bophan(
 CREATE TABLE NhanVien(
 	IDNhanVien int Primary key,
     HoTen NVARCHAR(45),
-	IDVitri int,
+	IDViTri int,
     IDTrinhDo int,
     IDBoPhan int,
     NgaySinh DATE,
@@ -87,6 +87,7 @@ CREATE TABLE HopDong(
     IDKhachHang int,
     IDDichVu int,
     IDNhanVien int,
+     int not null,
     FOREIGN KEY(IDNhanVien) REFERENCES NhanVien(IDNhanVien),
     FOREIGN KEY(IDKhachHang) REFERENCES KhachHang(IDKhachHang),
     FOREIGN KEY(IDDichVu) REFERENCES DichVu(IDDichVu)

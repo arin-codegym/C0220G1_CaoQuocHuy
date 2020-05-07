@@ -1,0 +1,99 @@
+
+-- create database if not exists  thiet_ke_phan_tich ;
+drop database if  exists thiet_ke_phan_tich;
+create database thiet_ke_phan_tich;
+use thiet_ke_phan_tich;
+create table Products(
+                         productCode varchar(15) primary key not null,
+                         productName varchar(70) not null,
+                         productScale varchar(10) not null,
+                         productVendor  varchar(50) not null,
+                         productDescription text not null,
+                         quantityInStock int not null,
+                         buyPrice float not null,
+                         MSRP float not null,
+                         productLine varchar(50)
+);
+
+create table Offices (
+                         officeCode varchar(10) primary key not null,
+                         city  varchar(50) not null,
+                         phone  varchar(50) not null,
+                         addressLine1  varchar(50) not null,
+                         addressLine2  varchar(50) ,
+                         state  varchar(50) ,
+                         country  varchar(50) not null,
+                         postalCode varchar(15) not null
+);
+create table Employees (
+                           employeeNumber int  primary key not null,
+                           lastName varchar(50) not null,
+                           firstName varchar(50) not null,
+                           email varchar(100) not null,
+                           jobTitle varchar(50) not null,
+                           officeCode varchar(10),
+                           reportTo int(11) default null
+
+);
+
+create table Customers(
+                          customerNumber int auto_increment primary key not null,
+                          customerName varchar(50) not null,
+                          contactLastName varchar(50) not null,
+                          contactFirstName varchar(50) not null,
+                          phone varchar(50) not null,
+                          addressLine1  varchar(50) not null,
+                          addressLine2 varchar(50),
+                          city varchar(50) not null,
+                          state varchar(50) not null,
+                          postalCode varchar(50) not null,
+                          counttry varchar(50) not null,
+                          creditLimit float,
+                          salesRepEmployeeNumber int,
+                          foreign key(salesRepEmployeeNumber) references Employees(employeeNumber)
+);
+
+create table Orders(
+                       orderNumber int auto_increment primary key not null,
+                       orderDate date not null,
+                       requiredDate date not null,
+                       shippedDate date not null,
+                       status varchar(15) not null,
+                       comments text,
+                       quantityOrdered int not null,
+                       priceEach float not null,
+                       customerNumber int,
+                       foreign key(customerNumber) references Customers(customerNumber)
+);
+
+
+create table OrderDetails (
+                              ordernumber int,
+                              productcode varchar(50),
+                              primary key(ordernumber,productcode)
+);
+alter table OrderDetails
+    add foreign key(ordernumber) references Orders(ordernumber),
+    add foreign key(productcode) references Products(productcode);
+
+create table Payments(
+                         customerNumber int primary key,
+                         foreign key(customerNumber) references Customers(customerNumber),
+                         checkNumber varchar(50) not null,
+                         paymentDate date not null,
+                         amount float not null,
+                         foreign key(customerNumber) references Customers(customerNumber)
+);
+
+create table Productlines(
+                             productLine varchar(50) primary key not null,
+                             textDescription text,
+                             image LONGTEXT
+);
+alter table Employees
+    add foreign key(reportTo) references Employees(employeeNumber),
+    add foreign key(officeCode) references Offices(officeCode)
+;
+alter table Products
+    add foreign key(productLine) references Productlines(productLine);
+

@@ -1,0 +1,120 @@
+drop database if exists library_management;
+create database library_management;
+use library_management;
+create table Book
+(
+    id_book     int primary key ,
+    cate_number int,
+    titles varchar(50) unique
+);
+
+create table Category
+(
+    id_category  int primary key not null,
+    kind_of_book varchar(50)
+
+);
+create table Student
+(
+    student_number varchar(15) primary key not null,
+    student_name   varchar(50)             not null,
+    address        text(500)               not null,
+    email          varchar(50)             not null,
+    image          blob,
+    id_book int,
+    borrowing_books varchar(50)   ,
+    returned_the_book date
+);
+
+create table BorrowOrder
+(
+    id_borrowOrder int primary key not null auto_increment ,
+    id_book        int  ,
+    student_number varchar(15) not null ,
+    borrowed_date  date   ,
+    return_date    date 
+);
+ alter table Book add foreign key( cate_number ) references Category(id_category);
+alter table Student add foreign key (id_book) references Book (id_book);
+ alter table BorrowOrder add foreign key (id_book) references Book(id_book);
+
+alter  table Student add foreign key (borrowing_books) references Book(titles);
+
+create trigger add_Student after insert on Student
+    for each row
+    begin
+    insert into BorrowOrder(id_book,student_number,borrowed_date) values (NEW.id_book,NEW.student_number,now());
+    end;
+
+
+delimiter //
+create procedure return_book (in student_var varchar(15))
+begin
+update Student  set  returned_the_book = now() where student_number= student_var;
+end //
+delimiter ;
+
+delimiter //
+create procedure update_Borrow_Order (in borrow_id int)
+begin
+    update BorrowOrder  set  return_date = now() where id_borrowOrder = borrow_id;
+end //
+
+delimiter ;
+
+-- call return_book('b1');
+
+call update_Borrow_Order(@2);
+-- delimiter //
+-- create trigger update_BorrowOrder before update on BorrowOrder
+--     for each row
+--     begin
+--         call update_Borrow_Order(id_borrowOrder);
+--        call return_book(student_number);
+--     end;
+-- delimiter ;
+
+-- call update_Borrow_Order(@1);
+
+INSERT INTO `library_management`.`category` (`id_category`, `kind_of_book`) VALUES ('1', 'văn học');
+INSERT INTO `library_management`.`category` (`id_category`, `kind_of_book`) VALUES ('2', 'hóa học');
+INSERT INTO `library_management`.`category` (`id_category`, `kind_of_book`) VALUES ('3', 'toán học');
+INSERT INTO `library_management`.`category` (`id_category`, `kind_of_book`) VALUES ('4', 'xã hội nhân văn');
+INSERT INTO `library_management`.`category` (`id_category`, `kind_of_book`) VALUES ('5', 'lập trình');
+INSERT INTO `library_management`.`category` (`id_category`, `kind_of_book`) VALUES ('6', 'thieu nhi');
+#
+#
+INSERT INTO `library_management`.`book` (`id_book`, `cate_number`, `titles`) VALUES ('1', '5', 'database');
+INSERT INTO `library_management`.`book` (`id_book`, `cate_number`, `titles`) VALUES ('2', '5', 'javacore');
+INSERT INTO `library_management`.`book` (`id_book`, `cate_number`, `titles`) VALUES ('3', '5', 'spring');
+INSERT INTO `library_management`.`book` (`id_book`, `cate_number`, `titles`) VALUES ('4', '5', 'javecript');
+INSERT INTO `library_management`.`book` (`id_book`, `cate_number`, `titles`) VALUES ('5', '5', 'anggular');
+INSERT INTO `library_management`.`book` (`id_book`, `cate_number`, `titles`) VALUES ('6', '6', 'con cò be bé');
+INSERT INTO `library_management`.`book` (`id_book`, `cate_number`, `titles`) VALUES ('7', '6', 'cháu lên ba');
+INSERT INTO `library_management`.`book` (`id_book`, `cate_number`, `titles`) VALUES ('8', '4', 'vật lý cơ bản');
+INSERT INTO `library_management`.`book` (`id_book`, `cate_number`, `titles`) VALUES ('9', '4', 'vật lý nâng cao');
+INSERT INTO `library_management`.`book` (`id_book`, `cate_number`, `titles`) VALUES ('10', '3', 'hóa học cơ bản');
+INSERT INTO `library_management`.`book` (`id_book`, `cate_number`, `titles`) VALUES ('11', '3', 'hóa học nâng cao');
+INSERT INTO `library_management`.`book` (`id_book`, `cate_number`, `titles`) VALUES ('12', '2', 'toán học cơ bản');
+INSERT INTO `library_management`.`book` (`id_book`, `cate_number`, `titles`) VALUES ('13', '2', 'toán học nâng cao');
+INSERT INTO `library_management`.`book` (`id_book`, `cate_number`, `titles`) VALUES ('14', '1', 'truyện kiều');
+INSERT INTO `library_management`.`book` (`id_book`, `cate_number`, `titles`) VALUES ('15', '1', 'chí phèo');
+
+INSERT INTO `library_management`.`student` (`student_number`, `student_name`, `address`, `email`,`id_book`, `borrowing_books`) VALUES ('a1', 'huy', 'quảng nam', '123@gmail.com',1,null);
+INSERT INTO `library_management`.`student` (`student_number`, `student_name`, `address`, `email`,`id_book`, `borrowing_books`) VALUES ('a2', 'hải', 'đà nẵng', '234@gmail.com', 4,'javecript');
+INSERT INTO `library_management`.`student` (`student_number`, `student_name`, `address`, `email`,`id_book`, `borrowing_books`) VALUES ('a3', 'toàn', 'huế', '234234@gmail.com',4, 'javecript');
+INSERT INTO `library_management`.`student` (`student_number`, `student_name`, `address`, `email`,`id_book`, `borrowing_books`) VALUES ('b1', 'tiến', 'sài gòn', '23424@gmail.com', 9,'vật lý nâng cao');
+INSERT INTO `library_management`.`student` (`student_number`, `student_name`, `address`, `email`, `borrowing_books`) VALUES ('b2', 'trung', 'hà nội', '4325435@gmail.com',null);
+INSERT INTO `library_management`.`student` (`student_number`, `student_name`, `address`, `email`,`borrowing_books`) VALUES ('b3', 'minh', 'khánh hòa', '345345@gmail.com',null);
+INSERT INTO `library_management`.`student` (`student_number`, `student_name`, `address`, `email`,`id_book`, `borrowing_books`) VALUES ('c1', 'hồng', 'sài gòn', '345345@gmail.com', 1,'database');
+INSERT INTO `library_management`.`student` (`student_number`, `student_name`, `address`, `email`,`id_book`, `borrowing_books`) VALUES ('c2', 'đào', 'quảng nam', '3546456@gmail.com',3, 'spring');
+INSERT INTO `library_management`.`student` (`student_number`, `student_name`, `address`, `email`,`id_book`, `borrowing_books`) VALUES ('c3', 'tuyết', 'quảng ngãi', '43@gmail.com',5, 'anggular');
+-- #Hiển thị tất cả các sách có trong thư viện
+-- # # select * from Book;
+-- # #- Hiển thị sách lập trình trong thư viện
+--  select * from Book join Category on Book.cate_number=Category.id_category where Category.kind_of_book='lập trình';
+-- # #Hiển thị tất cả các sách đang được mượn
+-- # c1 lấy từ sinh vien
+-- select borrowing_books from Student where Student.borrowing_books is not null  ;
+-- # cach 2 lấy từ book
+-- select titles from Book join  BorrowOrder BO on Book.id_book = BO.id_book where  borrowed_date is not null;
