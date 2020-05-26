@@ -1,0 +1,59 @@
+drop database demo_trigger;
+create database demo_trigger;
+use demo_trigger;
+
+CREATE TABLE `demo_trigger`.`tbl_khohang`
+(
+    `id_hang`      INT         NOT NULL,
+    `ma_hang`      INT         NULL unique,
+    `ten_hang`     VARCHAR(45) NULL,
+    `so_luong_ton` INT         NOT NULL,
+
+    PRIMARY KEY (`id_hang`),
+    UNIQUE INDEX `ma_hang UNIQUE` (`ma_hang` ASC) VISIBLE
+);
+CREATE TABLE `demo_trigger`.`tbl_dathang`
+(
+    `id_dat_hang`  int auto_increment,
+    `ma_hang`      INT NOT NULL unique,
+    `so_luong_dat` INT,
+    PRIMARY KEY (`id_dat_hang`),
+    UNIQUE INDEX `ma_hang_UNIQUE` (`ma_hang` ASC) VISIBLE
+);
+-- after table tbl_dathang
+--  add foreign key (ma_hang) refernce
+INSERT INTO `demo_trigger`.`tbl_khohang` (`id_hang`, `ma_hang`, `ten_hang`, `so_luong_ton`)
+VALUES ('1', '1', 'rau muong', '7');
+INSERT INTO `demo_trigger`.`tbl_khohang` (`id_hang`, `ma_hang`, `ten_hang`, `so_luong_ton`)
+VALUES ('2', '2', 'mong toi', '8');
+INSERT INTO `demo_trigger`.`tbl_khohang` (`id_hang`, `ma_hang`, `ten_hang`, `so_luong_ton`)
+VALUES ('3', '3', 'honda', '5');
+
+delimiter #
+create trigger trigger_dathang
+    after insert
+    on tbl_dathang
+    for each row
+BEGIN
+    declare soLuongTon INT;
+    declare soLuongDat int;
+    -- set soLuongTon = (select so_luong_ton from tbl_khohang where tbl_khohang.ma_hang = NEW.ma_hang);
+    -- update   tbl_khohang
+    -- set  so_luong_ton = (tbl_khohang.so_luong_ton - NEW.so_luong_dat)
+    -- where tbl_khohang.ma_hang = NEW.ma_hang;
+    set soLuongTon = (select so_luong_ton from tbl_khohang where tbl_khohang.ma_hang = NEW.ma_hang);
+    set soLuongDat = new.so_luong_dat;
+    if (soLuongDat < soLuongTon) then
+        update tbl_khohang
+        set so_luong_ton = soLuongTon - soLuongDat
+        where tbl_khohang.ma_hang = new.ma_hang;
+#     end if;
+#     if (soLuongDat > soLuongTon) THEN
+#         select 'khong du hang';
+    end if;
+end#;
+
+delimiter ;
+
+insert into demo_trigger.tbl_dathang(ma_hang, so_luong_dat)
+values (1, 5);

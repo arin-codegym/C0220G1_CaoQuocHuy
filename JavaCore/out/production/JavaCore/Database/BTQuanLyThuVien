@@ -62,19 +62,18 @@ end //
 
 delimiter ;
 
--- call return_book('b1');
+ call return_book('a1');
 
-call update_Borrow_Order(@2);
--- delimiter //
--- create trigger update_BorrowOrder before update on BorrowOrder
---     for each row
---     begin
---         call update_Borrow_Order(id_borrowOrder);
---        call return_book(student_number);
---     end;
--- delimiter ;
 
--- call update_Borrow_Order(@1);
+delimiter //
+create trigger update_BorrowOrder before update on BorrowOrder
+    for each row
+    begin
+#        call return_book(new.student_number);
+    end;
+delimiter ;
+
+  call update_Borrow_Order(2);
 
 INSERT INTO `library_management`.`category` (`id_category`, `kind_of_book`) VALUES ('1', 'văn học');
 INSERT INTO `library_management`.`category` (`id_category`, `kind_of_book`) VALUES ('2', 'hóa học');

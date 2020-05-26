@@ -87,8 +87,7 @@ CREATE TABLE HopDong(
     IDKhachHang int,
     IDDichVu int,
     IDNhanVien int,
-     int not null,
-    FOREIGN KEY(IDNhanVien) REFERENCES NhanVien(IDNhanVien),
+       FOREIGN KEY(IDNhanVien) REFERENCES NhanVien(IDNhanVien),
     FOREIGN KEY(IDKhachHang) REFERENCES KhachHang(IDKhachHang),
     FOREIGN KEY(IDDichVu) REFERENCES DichVu(IDDichVu)
 );
@@ -354,33 +353,33 @@ DROP TEMPORARY TABLE temp1;
 
 -- yêu cầu 14
 -- Duc  : thieu join bang dich vu
-select hopdong.IDHopDong, loaidichvu.tendichvu,dichvudikem.TenDichVuDiKem, count(hopdongchitiet.IDDichVuDiKem) as so_lan_su_dung
+select hopdong.IDHopDong, loaidichvu.TenLoaiDichVu,dichvudikem.TenDichVuDiKem, count(hopdongchitiet.IDDichVuDiKem) as so_lan_su_dung
 from hopdong
-inner join loaidichvu on loaidichvu.id=hopdong.IDDichVu
+inner join loaidichvu on loaidichvu.IDLoaiDichVu=hopdong.IDDichVu
 inner join hopdongchitiet on hopdongchitiet.IDHopDong=hopdong.IDHopDong
 inner join dichvudikem on dichvudikem.IDDichVuDIKem=hopdongchitiet.IDDichVuDIKem
 group by(dichvudikem.TenDichVuDiKem) having so_lan_su_dung=1;
 
 -- yêu cầu 15
-select nhanvien.IDNhanVien, nhanvien.ho_va_ten,nhanvien.SDT,nhanvien.DiaChi, trinhdo.TrinhDo,bophan.TenBoPhan, count(hopdong.IDNhanVien) as so_luong_hop_dong from nhanvien
+select nhanvien.IDNhanVien, nhanvien.HoTen,nhanvien.SDT,nhanvien.DiaChi, trinhdo.TrinhDo,bophan.TenBoPhan, count(hopdong.IDNhanVien) as so_luong_hop_dong from nhanvien
 inner join trinhdo on nhanvien.IDTrinhDo=trinhdo.IDTrinhDo
 inner join bophan on nhanvien.IDBoPhan=bophan.IDBoPhan
 inner join hopdong on nhanvien.IDNhanVien=hopdong.IDNhanVien
-where hopdong.NgayLamHopDong between "2018-01-01" and "2019-12-31"
-group by nhanvien.ho_va_ten
+where hopdong.NgayLamHopDong between '2018-01-01' and '2019-12-31'
+group by nhanvien.HoTen
 having so_luong_hop_dong<4;
 
 -- yêu cầu 16
 delete from nhanvien where not exists (select nhanvien.IDNhanVien from hopdong
-where hopdong.NgayLamHopDong between "2017-01-01"and "2019-12-31" and  hopdong.IDNhanVien=nhanvien.IDNhanVien
+where hopdong.NgayLamHopDong between '2017-01-01'and '2019-12-31' and  hopdong.IDNhanVien=nhanvien.IDNhanVien
 );
 
 -- yêu cầu 17
 update khachhang, (select hopdong.IDKhachHang as id,sum(hopdong.TongTien) as tong_tien from hopdong
 where  year(hopdong.NgayLamHopDong)=2019
 group by hopdong.IDKhachHang
-having tong_tien>10000000) as temp set khachhang.IDLoaiKhach = (select loaikhach.IDLoaiKhach from loaikhach where loaikhach.TenLoaiKhach="Diamond")
- where khachhang.IDLoaiKhach= (select loaikhach.IDLoaiKhach from loaikhach where loaikhach.TenLoaiKhach="Platinium")
+having tong_tien>10000000) as temp set khachhang.IDLoaiKhach = (select loaikhach.IDLoaiKhach from loaikhach where loaikhach.TenLoaiKhach='Diamond')
+ where khachhang.IDLoaiKhach= (select loaikhach.IDLoaiKhach from loaikhach where loaikhach.TenLoaiKhach='Platinium')
  and temp.id= khachhang.IDKhachHang;
 
  -- yêu cầu 18
@@ -389,7 +388,7 @@ having tong_tien>10000000) as temp set khachhang.IDLoaiKhach = (select loaikhach
  select * from hopdongchitiet;
  delete khachhang,hopdong,hopdongchitiet from khachhang inner join hopdong on khachhang.IDKhachHang=hopdong.IDKhachHang
  inner join hopdongchitiet on hopdong.IDHopDong=hopdongchitiet.IDHopDong
- where hopdongchitiet.IDHopDong is null or not exists(select hopdong.IDHopDong where hopdong.NgayLamHopDong>"2016-01-01" and hopdong.IDKhachHang=khachhang.IDKhachHang);
+ where hopdongchitiet.IDHopDong is null or not exists(select hopdong.IDHopDong where hopdong.NgayLamHopDong>'2016-01-01' and hopdong.IDKhachHang=khachhang.IDKhachHang);
 
 -- yêu cầu 19
 select * from dichvudikem;
@@ -401,10 +400,10 @@ group by dichvudikem.IDDichVuDiKem having count(hopdongchitiet.IDDichVuDiKem)>2)
 SET SQL_SAFE_UPDATES = 1;
 
 -- yêu cầu 20
-select nhanvien.IDNhanVien as ID,nhanvien.ho_va_ten,nhanvien.Email,nhanvien.SDT,nhanvien.NgaySinh,nhanvien.DiaChi, "nhanvien" as FromTable
+select nhanvien.IDNhanVien as ID,nhanvien.HoTen,nhanvien.Email,nhanvien.SDT,nhanvien.NgaySinh,nhanvien.DiaChi, 'nhanvien' as FromTable
 from nhanvien
 union all
-select khachhang.IDKhachHang as ID,khachhang.ho_va_ten,khachhang.Email,khachhang.SDT,khachhang.NgaySinh,khachhang.DiaChi,"khach hang" as FromTable
+select khachhang.IDKhachHang as ID,khachhang.HoTen,khachhang.Email,khachhang.SDT,khachhang.NgaySinh,khachhang.DiaChi,'khach hang' as FromTable
 from khachhang;
 
 

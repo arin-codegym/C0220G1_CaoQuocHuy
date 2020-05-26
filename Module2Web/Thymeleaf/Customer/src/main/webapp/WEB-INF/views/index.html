@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<!--Khai báo namespace thymeleaf thông qua thuộc tính th:-->
+<html xmlns:th="http://www.thymeleaf.org">
+<!--Gắn phần head và footer đã được khai báo trong file layout.html:-->
+<head th:replace="layout :: head"></head>
+<body>
+<h3>Customers</h3>
+<p>
+<!--    Đoạn mã sau đây trên trang index.html sẽ điều hướng đến trang create.html:-->
+    <a th:href="@{/customer/create}">
+        Add new customer
+    </a>
+</p>
+<div class="notify">
+<!--    đoạn mã sau để hiển thị thông báo:-->
+    <div th:if="${success}">
+        <span th:text="${success}"></span>
+    </div>
+</div>
+<table id = "customers">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Address</th>
+        <th>Edit</th>
+        <th>Delete</th>
+        <th>View</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="row,rowStat : ${customers}">
+        <td th:text="${row.getName()}"></td>
+        <td th:text="${row.getEmail()}"></td>
+        <td th:text="${row.getAddress()}"></td>
+<!--        điều hướng đến trang edit.html:-->
+        <td><a th:href="@{/customer/{id}/edit(id=${row.getId()})}">edit</a></td>
+        <td><a th:href="@{/customer/{id}/delete(id=${row.getId()})}">delete</a></td>
+        <td><a th:href="@{/customer/{id}/view(id=${row.getId()})}">view</a></td>
+    </tr>
+    </tbody>
+</table>
+<!--Gắn phần head và footer đã được khai báo trong file layout.html:-->
+<footer th:replace="layout :: footer"></footer>
+</body>
+</html>
+<!--Thuộc tính th:href khai báo đường link trong thẻ a.
+
+Thuộc tính th:if sử dụng để kiểm tra điều kiện.
+
+Thuộc tính th:each tương ứng với câu lệnh for each.
+
+Thuộc tính th:text dùng để đổ dữ liệu dưới dạng text vào thẻ HTML.
+
+${customers} là danh sách khách hàng sẽ được lặp, chính là model customers được controller truyền lên view.
+
+row đại diện cho một khách hàng tại một bước lặp cụ thể.
+
+rowStat là một biến trạng thái, giúp chúng ta theo dõi vòng lặp.
+
+${...} là biểu thức đánh giá các biến , biểu thức hay model.-->
+
+

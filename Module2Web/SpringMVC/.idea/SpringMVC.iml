@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="FacetManager">
+    <facet type="Spring" name="Spring">
+      <configuration>
+        <fileset id="fileset" name="Dispatcher Servlet" removed="false">
+          <file>file://$MODULE_DIR$/spring-user-model/web/WEB-INF/dispatcher-servlet.xml</file>
+          <file>file://$MODULE_DIR$/Simple_dictionary_MVC/web/WEB-INF/applicationContext.xml</file>
+          <file>file://$MODULE_DIR$/springMVC-greeting/out/artifacts/springMVC_greeting_war_exploded/WEB-INF/applicationContext.xml</file>
+          <file>file://$MODULE_DIR$/spring-timezone/src/main/webapp/WEB-INF/applicationContext.xml</file>
+          <file>file://$MODULE_DIR$/spring-user-model/web/WEB-INF/applicationContext.xml</file>
+          <file>file://$MODULE_DIR$/Simple_dictionary_MVC/out/artifacts/Simple_dictionary_MVC_war_exploded/WEB-INF/applicationContext.xml</file>
+          <file>file://$MODULE_DIR$/spring-user-model/out/artifacts/spring_user_model_war_exploded/WEB-INF/applicationContext.xml</file>
+          <file>file://$MODULE_DIR$/springMVC-greeting/web/WEB-INF/applicationContext.xml</file>
+          <file>file://$MODULE_DIR$/Simple_dictionary_MVC/out/artifacts/Simple_dictionary_MVC_war_exploded/WEB-INF/dispatcher-servlet.xml</file>
+          <file>file://$MODULE_DIR$/spring-user-model/out/artifacts/spring_user_model_war_exploded/WEB-INF/dispatcher-servlet.xml</file>
+          <file>file://$MODULE_DIR$/springMVC-greeting/out/artifacts/springMVC_greeting_war_exploded/WEB-INF/dispatcher-servlet.xml</file>
+          <file>file://$MODULE_DIR$/spring-timezone/src/main/webapp/WEB-INF/dispatcher-servlet.xml</file>
+          <file>file://$MODULE_DIR$/springMVC-greeting/web/WEB-INF/dispatcher-servlet.xml</file>
+          <file>file://$MODULE_DIR$/Simple_dictionary_MVC/web/WEB-INF/dispatcher-servlet.xml</file>
+        </fileset>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/springMVC-greeting/web/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/springMVC-greeting/web" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web2">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/Simple_dictionary_MVC/web/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/Simple_dictionary_MVC/web" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web3">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/springMVC-greeting/out/artifacts/springMVC_greeting_war_exploded/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/springMVC-greeting/out/artifacts/springMVC_greeting_war_exploded" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web4">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/spring-timezone/src/main/webapp/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/spring-timezone/src/main/webapp" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web5">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/spring-user-model/out/artifacts/spring_user_model_war_exploded/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/spring-user-model/out/artifacts/spring_user_model_war_exploded" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web6">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/Simple_dictionary_MVC/out/artifacts/Simple_dictionary_MVC_war_exploded/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/Simple_dictionary_MVC/out/artifacts/Simple_dictionary_MVC_war_exploded" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web7">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/spring-user-model/web/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/spring-user-model/web" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+  </component>
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$" />
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="Spring-5.2.3.RELEASE" level="project" />
+  </component>
+</module>
