@@ -15,7 +15,6 @@ public class Blog {
     private String title;
     private String content;
     private Date createDate;
-
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;

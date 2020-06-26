@@ -8,8 +8,12 @@ import com.rin.blogopen.service.BlogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 
 @Service
@@ -23,7 +27,10 @@ public class BlogServiecImpl implements BlogService {
         return blogRepository.findAll(pageable);
     }
 
-
+    @Override
+    public Page<Blog> findBlogByCreateDateContainingCustom(String s, Pageable pageable) {
+        return blogRepository.findBlogByCreateDateContainingCustom(s,pageable);
+    }
 
     @Override
     public Blog findById(Long id) {
@@ -66,4 +73,14 @@ public class BlogServiecImpl implements BlogService {
     public Page<Blog> findBlogByCategoryOrderById(Category category, Pageable pageable) {
         return blogRepository.findBlogByCategoryOrderById(category, pageable);
     }
+
+//    @Override
+//    public Page<Blog> findBlogByCreateDateContainingCustom( String s, Pageable pageable)  {
+//    int calendar = Calendar.getInstance().get(Calendar.YEAR);
+//        s= s+"-"+calendar;
+//       SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+//       java.util.Date format1= format.parse();
+////        Date format2 = new Date(format1.getTime());
+//        return blogRepository.findBlogByCreateDateContainingCustom(format2, pageable);
+//    }
 }

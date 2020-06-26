@@ -67,6 +67,8 @@ public class BlogController {
     @GetMapping("/blogs")
     public ModelAndView listBlogs(@RequestParam("s") Optional<String> s, Pageable pageable) throws ParseException {
         String pattern = "^\\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])$";
+      //  String patternGetMonDay="^(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])$";
+        String patternGetMonDay="^(0?[1-9]|[12][0-9]|3[01])$";
         Page<Blog> blogs;
         Pageable pageableSortByBlogId = PageRequest.of(pageable.getPageNumber(),5, Sort.by("id").descending());
         if (s.isPresent()) {
@@ -75,7 +77,10 @@ public class BlogController {
             if (s.get().matches(pattern)) {
                 Date date2 = Date.valueOf(s.get());
                 blogs = blogService.findBlogByCreateDate( date2, pageable);
-            } else {
+            }else if (s.get().matches(patternGetMonDay)){
+                blogs=blogService.findBlogByCreateDateContainingCustom("%" + s.get() + "%",pageable);
+            }
+            else {
                 blogs = blogService.findBlogByContentOrTitle(s.get(), s.get(), pageable);
             }
         } else {

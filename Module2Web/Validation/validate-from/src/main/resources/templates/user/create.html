@@ -50,7 +50,7 @@
         </tr>        <tr>
             <td>Birthday:</td>
             <td><label>
-                <input type="date" th:field="*{birthday}"/>
+                <input type="date" th:value="*{birthday}" th:field="*{birthday}"/>
             </label></td>
             <td th:if="${#fields.hasErrors('birthday')}" th:errors="*{birthday}">Name Error</td>
         </tr>

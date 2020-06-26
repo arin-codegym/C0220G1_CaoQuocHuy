@@ -6,20 +6,18 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
-import org.springframework.web.bind.annotation.ExceptionHandler;
+
 
 import javax.persistence.*;
-import javax.validation.ConstraintViolation;
+
 import javax.validation.constraints.*;
-import javax.validation.executable.ExecutableValidator;
-import javax.validation.metadata.BeanDescriptor;
-
-import java.sql.Date;
-import java.time.*;
-//import java.util.Calendar;
-
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Calendar;
-import java.util.Set;
+import java.util.Date;
+
 
 @Component
 @Entity
@@ -41,7 +39,7 @@ public class User implements Validator {
     private String lastName;
 
     @Column(name = "phoneNumber")
-    @Pattern(regexp = "((09|03|07|08|05)+([0-9]{8})\\b)",message = "dau so la (09|03|07|08|05) va gom 10 so" )
+    @Pattern(regexp = "((09|03|07|08|05)+([0-9]{8})\\b)", message = "dau so la (09|03|07|08|05) va gom 10 so")
     private String phoneNumber;
 
     @Column(name = "age")
@@ -53,12 +51,13 @@ public class User implements Validator {
     @Pattern(regexp = "^[\\w]{1,}[\\w.+-]{0,}@[\\w-]{2,}([.][a-zA-Z]{2,}|[.][\\w-]{2,}[.][a-zA-Z]{2,})$")
     private String email;
 
-    @Column(name = "birthday")
-    @DateTimeFormat(pattern = "MM/dd/yyyy")
+    @Column(name = "birthday",length = 50)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+ //   @Temporal(TemporalType.DATE)
     private Date birthday;
 
     public Date getBirthday() {
-        return  birthday;
+        return birthday;
     }
 
     public void setBirthday(Date birthday) {
@@ -125,18 +124,20 @@ public class User implements Validator {
     public void validate(Object target, Errors errors) {
         User user = (User) target;
 
-        if (user.getBirthday()==null){
-            errors.rejectValue("birthday","birthday.null");
-        }else {
-        Date date = user.getBirthday();
+        if (user.getBirthday() == null) {
+            errors.rejectValue("birthday", "birthday.null");
+        } else {
+            Instant date1 = user.getBirthday().toInstant();
+
+            LocalDate date = LocalDateTime.ofInstant(date1, ZoneId.systemDefault()).toLocalDate();
 //        Instant instant = Instant.ofEpochMilli(date.getTime());
 //        LocalDate localDate = LocalDateTime.ofInstant(instant, ZoneId.systemDefault()).toLocalDate();
-            LocalDate localDate=date.toLocalDate();
-        Calendar cal = Calendar.getInstance();
-        ValidationUtils.rejectIfEmpty(errors, "birthday", "birthday.empty");
-        if (localDate.getYear() < 1900 || localDate.getYear() > cal.get(Calendar.YEAR)) {
-            errors.rejectValue("birthday", "birthday.year");
+            // LocalDate localDate=date.toLocalDate();
+            Calendar cal = Calendar.getInstance();
+            ValidationUtils.rejectIfEmpty(errors, "birthday", "birthday.empty");
+            if (date.getYear() < 1900 || date.getYear() > cal.get(Calendar.YEAR)) {
+                errors.rejectValue("birthday", "birthday.year");
+            }
         }
-    }
     }
 }

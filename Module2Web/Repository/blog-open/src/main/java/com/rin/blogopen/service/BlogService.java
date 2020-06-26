@@ -4,7 +4,10 @@ import com.rin.blogopen.model.Blog;
 import com.rin.blogopen.model.Category;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.query.Param;
+
 import java.sql.Date;
+import java.text.ParseException;
 
 
 public interface BlogService {
@@ -20,5 +23,5 @@ public interface BlogService {
     Page<Blog> findBlogByContentOrTitleOrCreateDate(String content, String title, Date createDate, Pageable pageable);
     Page<Blog> findBlogByContentOrTitle(String content, String title, Pageable pageable);
     Page<Blog> findBlogByCategoryOrderById(Category category, Pageable pageable);
-
+    Page<Blog> findBlogByCreateDateContainingCustom( String s, Pageable pageable) ;
 }

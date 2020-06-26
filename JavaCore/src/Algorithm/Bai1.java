@@ -10,6 +10,5 @@ public class Bai1 {
         for (int i = 0; i < n; i++) {
             System.out.println("*****");
         }
-
-    }
+     
 }
