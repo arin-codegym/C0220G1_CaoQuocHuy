@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+    <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div class="col-5">
+    <div class="container">
+        <h2>Form Dang Ky</h2>
+        <form th:action="@{/dangky}" method="post" th:object="${khachhang}">
+            <div class="form-group">
+                <label for="hoten">Họ và Tên :</label>
+                <p th:if="${#fields.hasErrors('hoTen')}" th:errors = "*{hoTen}" class="text-danger"></p>
+                <input type="text" class="form-control" id="hoten"  name="hoten" th:field="*{hoTen}">
+            </div>
+
+            <div class="form-group ">
+                <label>Ngày Sinh:</label>
+                <input type="date" class="form-control"   name="ngaysinh" th:field="*{ngaySinh}" />
+                <p th:if="${#fields.hasErrors('ngaySinh')}" th:text= "#{birthday.convert}" class="text-danger"></p>
+            </div>
+
+
+            <div class="form-group">
+                <label for="cmnd">Số CMND:</label>
+                <p th:if="${#fields.hasErrors('CMND')}" th:errors = "*{CMND}" class="text-danger"></p>
+                <input type="text" class="form-control" id="cmnd"  name="cmnd" th:field="*{CMND}">
+            </div>
+
+            <div class="form-group">
+                <label for="dienthoai">Số Điện Thoại :</label>
+                <p th:if="${#fields.hasErrors('sdt')}" th:errors = "*{sdt}" class="text-danger"></p>
+                <input type="text" class="form-control" id="dienthoai"  name="dienthoai" th:field="*{sdt}">
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email :</label>
+                <p th:if="${#fields.hasErrors('email')}" th:errors = "*{email}" class="text-danger"></p>
+                <input type="text" class="form-control" id="email"  name="email" th:field="*{email}">
+            </div>
+
+            <div class="form-group">
+                <label for="diachi">Địa Chỉ:</label>
+                <p th:if="${#fields.hasErrors('diaChi')}" th:errors = "*{diaChi}" class="text-danger"></p>
+                <input type="text" class="form-control" id="diachi"  name="diachi" th:field="*{diaChi}">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    $('#ngaysinh').datepicker({
+        // format: 'dd/mm/yyyy',
+        uiLibrary: 'bootstrap4',
+        autoclose: true,
+        todayHighlight: true
+    });
+</script>
+</body>
+</html>

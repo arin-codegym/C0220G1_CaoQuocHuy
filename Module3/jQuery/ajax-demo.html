@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/text.css">
+</head>
+<body>
+<div class="container">
+    <div class="panel panel-default">
+        <div class="panel-heading text-center text-danger indam ">Demo Ajax</div>
+        <div class="panel-body">
+            <p>Sử dụng ajax đổ dữ liệu :</p>
+        </div>
+    </div>
+
+
+    <table class="table" id="add_data">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Fullname</th>
+            <th>Gender</th>
+            <th>Birthday</th>
+            <th>PhoneNumber</th>
+            <th>Address</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+</div>
+<div class="container">
+    <button id="load" type="button" class="btn btn-default border-danger">Load</button>
+</div>
+<script>
+    $(document).ready(function () {
+        $("#load").click(function () {
+
+            $.ajax({
+                type: "GET",
+                url: "https://spring-student-api.herokuapp.com/info?apiKey=eaf118ab-babf-43ed-a788-b66d2f0ca00c",
+                //contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    let event_data = '';
+                    $.each(data, function (index, value) {
+                        event_data += '<tr>';
+                        event_data += '<th>' + value.id+ '</th>';
+                        event_data += '<th>' + value.fullName+ '</th>';
+                        event_data += '<th>' + value.gender+ '</th>';
+                        event_data += '<th>' + value.birthDate+ '</th>';
+                        event_data += '<th>' + value.phoneNumber+ '</th>';
+                        event_data += '<th>' + value.address+ '</th>';
+                        event_data += '<tr>';
+                    });
+                    $("#add_data").append(event_data);
+                },
+                fail: function (result) {
+                    alert('khong con gi de load')
+                }
+            });
+
+        })
+    })
+</script>
+</body>
+</html>

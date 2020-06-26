@@ -1,0 +1,27 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Create student</title>
+</head>
+<body>
+
+<a href="?lang=en">English</a>|<a href="?lang=vn">Vietnamese</a><br>
+
+<form th:action="@{/create}" method="post" th:object="${student}" >
+
+    <label th:text="#{create.name}"></label>
+    <input th:field="*{name}"/><br>
+    <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
+
+    <label th:text="#{create.birthday}"></label>
+    <input th:field="*{dateOfBirth}" /><br>
+    <p th:if="${#fields.hasErrors('dateOfBirth')}" th:errors="*{dateOfBirth}"></p>
+
+    <select th:field="*{classStudent}">
+        <option th:each="class : ${listClasses}"
+                th:value="${class.id}" th:text="${class.name}"></option>
+    </select><br>
+    <input type="submit" value="Create" />
+</form>
+
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create customer</title>
+</head>
+<body>
+<a th:text="#{language}"></a>: <a onclick="onclicken('en')" href="?lang=en">English</a> | <a onclick="onclicken('vn')"
+                                                                                             href="?lang=vi">Vietnamese</a>
+<h1 th:text="#{Create-new-customer}"></h1>
+<p>
+    <a href="/customers" th:text="#{Customer-list}"></a>
+</p>
+<th:block th:if="${message}">
+    <p th:text="${message}"></p>
+</th:block>
+<form th:action="@{/create-customer}" th:object="${customer}" method="post">
+    <table>
+        <tr>
+            <td th:text="#{First-name}"></td>
+            <td><input type="text" th:field="*{firstName}"/></td>
+        </tr>
+        <tr>
+            <td th:text="#{Last-name}"></td>
+            <td><input type="text" th:field="*{lastName}"/></td>
+        </tr>
+        <tr>
+            <td th:text="#{Summary}"></td>
+            <td th:if="${lang} == en">
+                <input th:field="*{summary_en}">
+            </td>
+            <td th:if="${lang} == vi">
+                <input th:field="*{summary_vi}">
+            </td>
+        </tr>
+        <tr>
+            <td th:text="#{Province}"></td>
+            <td>
+                <select th:field="*{province}">
+                    <option th:each="p : ${provinces}" th:value="${p.id}" th:text="${p.name}"></option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" th:value="#{Create-new-customer}"></td>
+        </tr>
+    </table>
+</form>
+</body>
+<script>
+    let change;
+
+    function onclicken(string) {
+
+        change = string;
+    }
+</script>
+
+</html>

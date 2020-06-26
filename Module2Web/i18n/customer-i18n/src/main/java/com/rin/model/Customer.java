@@ -1,0 +1,80 @@
+package com.rin.model;
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = "customers")
+public class Customer {
+
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
+    private Long id;
+    private String firstName;
+    private String lastName;
+
+    public String getSummary_en() {
+        return summary_en;
+    }
+
+    public void setSummary_en(String summary_en) {
+        this.summary_en = summary_en;
+    }
+
+    public String getSummary_vi() {
+        return summary_vi;
+    }
+
+    public void setSummary_vi(String summary_vi) {
+        this.summary_vi = summary_vi;
+    }
+
+    private String summary_en;
+    private String summary_vi;
+    @ManyToOne
+    @JoinColumn(name = "province_id")
+    private Province province;
+
+    public Customer() {}
+
+    public Customer(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Customer[id=%d, firstName='%s', lastName='%s']", id, firstName, lastName);
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public Province getProvince() {
+        return province;
+    }
+
+    public void setProvince(Province province) {
+        this.province = province;
+    }
+}

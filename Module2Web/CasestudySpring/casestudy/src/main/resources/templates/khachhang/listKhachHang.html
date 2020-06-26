@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Danh Sach Khach Hang</title>
+    <link rel="stylesheet" th:href="@{/bootstrap.css}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css"
+          integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN"
+          crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/home.css}">
+</head>
+<body>
+<div class="container-fluid">
+    <h2>Danh Sach Khach Hang</h2>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Ho Ten</th>
+            <th>Ngay Sinh</th>
+            <th>CMND</th>
+            <th>SDT</th>
+            <th>Email</th>
+            <th>Dia Chi</th>
+            <th>Loai Khach</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <th:block th:each="khachhang : ${listCustomer}">
+            <tr>
+                <td th:text="${khachhang.getHoTen()}"></td>
+                <td th:text="${khachhang.getNgaySinh()}"></td>
+                <td th:text="${khachhang.getCMND()}"></td>
+                <td th:text="${khachhang.getSdt()}"></td>
+                <td th:text="${khachhang.getEmail()}"></td>
+                <td th:text="${khachhang.getDiaChi()}"></td>
+                <td th:text="${khachhang.idLoaiKhach.name}"></td>
+                <td>
+                    <a href="#">Delete</a>
+                    <a href="#">Edit</a>
+                </td>
+            </tr>
+        </th:block>
+
+
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--    <link rel="stylesheet" type="text/css" href="/css/BT1_TaoTrangDocTruyen.css">-->
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+
+    }
+
+    #header {
+        background-color: #555555;
+
+    }
+
+    .logo {
+        float: left;
+        width: 100px;
+    }
+    .logo img{
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: auto;
+    }
+
+    .banner {
+        float: right;
+        width: 70%;
+        height: 100%;
+        position: relative;
+        right: 0px;
+        left: 400px;
+        top: 100px;
+        color: #0040ff;
+    }
+
+    .navheader {
+        clear: both;
+    }
+
+    .navheader ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #333;
+    }
+
+    .navheader li {
+        float: left;
+    }
+
+    .navheader li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+    }
+
+    .navheader li a:hover:not(.active) {
+        background-color: #1d2124;
+    }
+
+    .active {
+        background-color: orange;
+    }
+
+    input[type=text] {
+        width: 50%;
+        padding: 12px 20px;
+        box-sizing: border-box;
+        margin-top: 100px;
+        margin-bottom: 0;
+        margin-left: 8em;
+        border: 2px solid black;
+        border-radius: 4px;
+    }
+
+    .button {
+        background-color: #4CAF50;
+        border: none;
+        color: white;
+        padding: 12px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+    }
+
+    .button3 {
+        background-color: white;
+        color: black;
+        border: 2px solid black;
+        border-radius: 4px;
+    }
+
+    .leftbody {
+        float: left;
+        background-color: #6f42c1;
+        width: 10%;
+    }
+
+    .footer {
+        text-align: center;
+        clear: both;
+        background-color: gray;
+        height: 2em;
+        width: 100%;
+    }
+
+    .leftbody ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        width: 200px;
+        background-color: #f1f1f1;
+    }
+
+    .leftbody li a {
+        display: block;
+        color: #000;
+        padding: 8px 16px;
+        text-decoration: none;
+    }
+
+    .leftbody li a.active {
+        background-color: orangered;
+        color: white;
+    }
+
+    .leftbody li a:hover:not(.active) {
+        background-color: #555;
+        color: white;
+
+    }
+
+    .main {
+        float: left;
+        width:80%;
+       padding-top: 0;
+    }
+
+    .content {
+        float: left;
+        margin: 2em;
+        border-radius: 4px;
+        border: solid 2px;
+        width: 15em;
+        height: 25em;
+        text-align: center;
+    }
+
+    .content img {
+        margin-top: 1em;
+        width: 70%;
+        height: 80%;
+    }
+
+    .content p {
+        margin-top: 1em;
+        font-size: 1em;
+        color: tomato;
+    }
+</style>
+<body>
+<div id="header">
+    <div class="logo"><img
+            src="http://media.designs.vn/public/media/media/picture/10-10-2016/7-logo-truyen-hoanh-trang-nhat-moi-thoi-dai-09.jpg">
+    </div>
+    <div class="banner">
+        <input type="text" name="search" placeholder="Tìm kiếm">
+        <input type="submit" value="search" class="button button3">
+    </div>
+    <div class="navheader">
+        <nav>
+            <ul>
+                <li><a class="active" href="#">Trang chủ</a></li>
+                <li><a href="#">Thể loại</a></li>
+                <li><a href="#">Ngôn tình</a></li>
+                <li><a href="#">Truyện teen</a></li>
+                <li><a href="#">Truyện mới</a></li>
+            </ul>
+        </nav>
+    </div>
+</div>
+<div style="margin-top: 5em; width: 100%;">
+    <div class="leftbody">
+        <ul>
+            <li><a href="#">Truyện top</a></li>
+        </ul>
+        <ul>
+            <li>
+                <a href="#">Ngôn tình</a></li>
+        </ul>
+        <ul>
+            <li><a href="#">Kiếm hiệp</a></li>
+        </ul>
+        <ul>
+            <li><a href="#">Xuyên Không</a></li>
+        </ul>
+        <ul>
+            <li><a href="#">Tiên hiệp</a></li>
+        </ul>
+        <ul>
+            <li><a href="#">Lịch Sử</a></li>
+        </ul>
+        <ul>
+            <li><a href="#">Trinh thám</a></li>
+        </ul>
+        <ul>
+            <li><a href="#">Truyện ma</a></li>
+        </ul>
+    </div>
+    <div class="main">
+        <div class="content">
+            <img src="../image/p1.jpg">
+            <p>Đại chúa tể</p>
+        </div>
+        <div class="content">
+            <img src="https://static.8cache.com/cover/o/eJzLyTDR1w02iCyoNA7xz80K1A8LzHLKyg7IKfP31HeEglwPE32_ynQD94Jyi9TIYv1yI0NT3QxjIyMAZpUS9w==/long-huyet-chien-than.jpg">
+            <p>Long huyết chiến</p>
+        </div>
+        <div class="content">
+            <img src="https://static.8cache.com/cover/o/eJzLyTDW1w10CgqpdE83DjZM1w8rLE10dIksKDHz1HeEAi8jE32TKN8Mp8Qwx4CAUP1yI0NT3QxjIyNdz2QTIwCmxxMg/dao-hoa-sinh-tu-kiep.jpg">
+            <p>ĐÀO HOA SINH TỬ KIẾP</p>
+        </div>
+        <div class="content">
+            <img src="https://static.8cache.com/cover/eJzLyTDWN_A1MrK09CqyMAlLMsu18DXI8yiPSEwvrnT1Ls8pDguwCEouC040CLI09ghP94syTXQ1r3Txy_ML8cxK80jJrqgqSwkJT072cvYP8fUJLvSKNIy0LTcyNNXNMDYyAgDv6B8G/he-thong-quy-dao-chi-chu.jpg">
+            <p>HỆ THỐNG QUỶ ĐẠO CHI CHỦ</p>
+        </div>
+        <div class="content">
+            <img src="https://static.8cache.com/cover/eJzLyTDWN3HMKS71dnKqjMiO1zVNqSo3DUmqTK8q9tH1jcy0DLQwMkp29MrL985IczUqSY6MNNQ1LTcpNncPKij2y_EMtsgOCi408snwy8vPNSvLN4lI8s-3LTcyNNXNMDYyAgAqJB-b/khong-co-gi-la-dai-su-huynh.jpg">
+            <p>KHÔNG CÓ GÌ LẠ ĐẠI SƯ HUYNH</p>
+        </div>
+        <div class="content">
+            <img src="https://static.8cache.com/cover/o/eJzLyTDW1800DPWPiHIprspP1w8rLE321w0tdany1HeEAm9PR_1A31TTovxSE4vgQP1yI0NT3QxjIyNdz2QTIwDKfRP4/tam-sinh-tam-the-chiet-cam-thu.jpg">
+            <p>TAM SINH TAM THẾ CHIẾT CẨM THƯ</p>
+        </div>
+
+    </div>
+    <div class="footer">
+        @ Arin tạo trang dọc truyện ngắn.
+    </div>
+</div>
+</body>
+</html>

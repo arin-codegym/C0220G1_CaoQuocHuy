@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8">
+    <title>Tạo bố cục cơ bản</title>
+</head>
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    .head {
+        text-align: center;
+        color: #a6ad8e;
+        background-color: #0040ff;
+        height: 300px;
+        padding-top: 70px;
+        font-size: 100px;
+        font-family: "Times New Roman", Titanic, Saigon;
+    }
+
+
+    .layout {
+        text-align: center;
+        color: #a6ad8e;
+        background-color: #0040ff;
+        height: 800px;
+        border: #0040ff;
+        font-size: 300px;
+        font-family: "Times New Roman", Titanic, Saigon;
+    }
+
+    .left {
+        background-color: #2196F3;
+        padding: 20px;
+        float: left;
+        width: 20%; /* The width is 20%, by default */
+        height: 1000px;
+        text-align: center;
+    }
+
+    .main {
+        background-color: #f1f1f1;
+        padding: 20px;
+        float: left;
+        width: 60%; /* The width is 60%, by default */
+        height: 1000px;
+        text-align: center;
+    }
+
+    .right {
+        background-color: #4CAF50;
+        padding: 20px;
+        float: left;
+        width: 20%; /* The width is 20%, by default */
+        height: 1000px;
+        text-align: center;
+    }
+
+    @media screen and (max-width: 800px) {
+        .left, .main, .right {
+            width: 100%; /* The width is 100%, when the viewport is 800px or smaller */
+            height: 300px;
+        }
+    }
+</style>
+<body>
+<div class="head">
+    Head
+</div>
+
+<div class="left">
+    <p>Left Menu</p>
+</div>
+
+<div class="main">
+    <p>Main Content</p>
+</div>
+
+<div class="right">
+    <p>Right Content</p>
+</div>
+
+<div class="layout">
+    Layout
+</div>
+
+
+</body>
+</html>

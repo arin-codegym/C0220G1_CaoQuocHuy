@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en"><html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+                      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Danh sach khach hang</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<h3>Danh Sach Khach Hang</h3>
+<a href="/admin/addNewCustomer">Them moi khach hang</a>
+<form action="/admin/listKhachHang">
+    <input type="text" name="firstname">
+    <input type="submit" value="Search">
+</form>
+<table class="table table-hover">
+    <tr>
+        <th>Ho Ten</th>
+        <th>Email</th>
+        <th>Dia Chi</th>
+        <th>Dien Thoai</th>
+        <th>Ngay Sinh</th>
+        <th>So CMND</th>
+        <th>Loai Khach</th>
+        <th>Action</th>
+    </tr>
+    <th:block th:each="khachhang : ${listKhachHang}">
+        <tr>
+            <td th:text="${khachhang.hoTen}"></td>
+            <td th:text="${khachhang.email}"></td>
+            <td th:text="${khachhang.diaChi}"></td>
+            <td th:text="${khachhang.sdt}"></td>
+            <td th:text="${#dates.format(khachhang.ngaySinh, 'dd-MM-yyyy')}"></td>
+            <td th:text="${khachhang.CMND}"></td>
+            <td th:text="${khachhang.loaiKhachHang.name}"></td>
+            <td>
+                <a th:href="@{'/admin/suathongtinkhachhang'(id= ${khachhang.id})}">Edit</a>
+                <a th:href="@{'/admin/xoakhachhang'(id = ${khachhang.id})}" onclick="if (confirm('Bạn Muốn Xoá Người Này???')){return true} else {event.preventDefault()};">Delete</a>
+            </td>
+        </tr>
+    </th:block>
+
+</table>
+<div>
+    <a th:href="@{'/admin/listKhachHang'(page=${listKhachHang.number - 1}, firstname=${firstname})}" th:if="${listKhachHang.hasPrevious()}">Previous</a>
+    <span th:text="${listKhachHang.number +1}"></span>/<span th:text="${listKhachHang.totalPages}"></span>
+    <a th:href="@{'/admin/listKhachHang'(page=${listKhachHang.number + 1}, firstname=${firstname})}" th:if="${listKhachHang.hasNext()}">Next</a>
+</div>
+<div>
+    <form action="/admin/listKhachHang" class="form-inline">
+        <input type="text" name="page" id="page">
+        <input type="submit" value="Find" onclick="checkPage()">
+    </form>
+</div>
+
+<script>
+
+    function checkPage() {
+        var page = document.getElementById("page").value;
+        if (page > 0 ){
+            page = page -1;
+            document.getElementById("page").value = page;
+        }
+    }
+
+</script>
+</body>
+</html>

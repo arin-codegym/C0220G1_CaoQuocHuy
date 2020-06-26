@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container-fluid col-md-8">
+    <form th:action="@{/admin/suathongtinkhachhang}" method="post" th:object="${khachhang}">
+        <input type="hidden" th:value="*{id}">
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="name">Họ và Tên: </label>
+                <input type="text" class="form-control" th:value="*{hoTen}" id="name" th:field="*{hoTen}" placeholder="Nhập họ và tên">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="ngaysinh">Ngày Sinh: </label>
+                <input type="date" class="form-control" id="ngaysinh" th:value="*{ngaySinh}" th:field="*{ngaySinh}">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="cmnd">CMND: </label>
+                <input type="text" class="form-control" id="cmnd" placeholder="Số chứng minh thư nhân dân"
+                       th:field="*{CMND}" th:value="*{CMND}">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="sdt">Số điện thoại: </label>
+                <input type="text" class="form-control" id="sdt" placeholder="Nhập số điện thoại" th:field="*{sdt}" th:value="*{sdt}">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="email">Email: </label>
+                <input type="text" class="form-control" id="email" placeholder="Nhập email"
+                       th:field="*{email}" th:value="*{email}">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="diachi">Địa Chỉ: </label>
+                <input type="text" class="form-control" id="diachi" placeholder="Nhập địa chỉ"
+                       th:field="*{diaChi}" th:value="*{diaChi}">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="inputState">Loại Khách: </label>
+                <select id="inputState" class="form-control" th:field="*{loaiKhachHang}" th:value="*{loaiKhachHang.id}">
+                    <th:block th:each="loaikhach : ${listLoaiKhach}">
+                        <option th:value="${loaikhach.id}" th:text="${loaikhach.name}"></option>
+                    </th:block>
+                </select>
+            </div>
+            <div class="form-group col-md-6">
+                <button type="submit" class="btn btn-primary">Sign in</button>
+            </div>
+        </div>
+
+    </form>
+</div>
+
+<script>
+    $('#ngaysinh').datepicker({
+        format: 'dd/mm/yyyy',
+        uiLibrary: 'bootstrap4'
+    });
+</script>
+</body>
+</html>

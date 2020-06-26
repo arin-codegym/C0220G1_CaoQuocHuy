@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>View Product</title>
+</head>
+<body>
+<h1>View Product: <span th:text="${product.productName}"></span></h1>
+<a href="/">Product list</a>
+<th:block th:if="${message}">
+    <h3> <p th:text="${message}"></p></h3>
+</th:block>
+<form th:action="@{/buy/__${product.productId}__}" method="post">
+    <table border="1">
+        <tr>
+            <th>Product Name</th>
+            <th>Price</th>
+            <th>Description</th>
+            <th>Image</th>
+
+        </tr>
+        <tr>
+            <td th:text="${product.productName}"></td>
+            <td th:text="${product.productPrice}"></td>
+            <td th:text="${product.productDescription}"></td>
+            <td><img th:src="@{${product.productImage}}" style="height: 50px;width: 50px" ></td>
+        </tr>
+    </table>
+    <br>
+    <div class="group-input">
+        <button type="button" onclick="changeValue('-')">-</button>
+        <label>
+            <input name="quantity" type="text" class="input" value="1" id="valueProduct">
+        </label>
+        <button type="button"  onclick="changeValue('+')">+</button></div>
+    <br>
+    <input type="submit" value="Add to cart">
+</form>
+<br>
+<a href="/cart">Go to cart</a>
+</body>
+<script>
+    function changeValue(sign) {
+        let valueProductElement = document.getElementById("valueProduct");
+        let valueProduct = valueProductElement.value;
+        if (sign === "+") {
+            valueProduct++;
+        } else if(valueProduct>1){
+            valueProduct--;
+        }
+        console.log(valueProduct);
+        valueProductElement.value = valueProduct;
+    }
+</script>
+</html>

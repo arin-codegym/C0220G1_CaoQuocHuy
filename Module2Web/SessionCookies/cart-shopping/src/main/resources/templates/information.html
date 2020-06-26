@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>View Product:>
+    <span th:text="${product.name}"></span></h1>
+<a href="/">Product list</a>
+<!--/*@thymesVar id="message" type=""*/-->
+<th:block th:if="${message}">
+    <h3><p th:text="${message}"></p></h3>
+</th:block>
+<form th:action="@{/view-product/__${product.id}__}" method="post">
+    <table border="1">
+        <tr>
+            <th>Product</th>
+            <th>Information</th>
+            <th>Price</th>
+        </tr>
+        <tr>
+            <th th:text="${product.name}">
+            <td th:text="${product.information}"></td>
+            <td th:text="${#numbers.formatCurrency(product.price)}"></td>
+        </tr>
+    </table>
+    <br>
+    <input type="submit" value="Mua ngay">
+
+</form>
+<br>
+<a href="/cart">Go to card</a>
+</body>
+
+</html>
